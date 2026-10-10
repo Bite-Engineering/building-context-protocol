@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Building Context Protocol — Specification v0.1</title>
+<meta name="description" content="An open protocol for how AI agents and software tools discover, request and act on building data across the asset lifecycle.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYuNDYxMyAyNTYuNDYxMjkxIj48cmVjdCB3aWR0aD0iMjU2LjQ2MTMiIGhlaWdodD0iMjU2LjQ2MTI5MSIgZmlsbD0iIzAwMmZhNyIvPjxnPjxwYXRoIGQ9Ik0xMjguMjMwNjM0LDUxLjE4Nzg0bC02OC42Nzk2ODQsMzguNTIwMTA1djc3LjA0MjgwNWw2OC42Nzk2ODQsMzguNTIyNyw2OC42Nzk3MTctMzguNTIyN3YtNzcuMDQyODA1bC02OC42Nzk3MTctMzguNTIwMTA1Wk0xODkuMDU0ODQ5LDE2Mi4zNDQ2NDFsLTcuODM5NTQyLDQuMzk4MDY0LTcuODU4MTMsNC40MDYxMDktMTEuNzc3OTAxLDYuNjA2NDM4LTcuODQ3NTIyLDQuNDAzNTE0LTExLjc4ODU3Myw2LjYxMTc1OS03LjgzOTU0Miw0LjM5NTQ2OS01Ljg3MzAwNiwzLjI5NTIzOS01Ljg3MzAwNi0zLjI5NTIzOS03LjgzOTU0Mi00LjM5NTQ2OS0xMS43OTkxODEtNi42MTk4MDQtMTkuNjMzNDAzLTExLjAwOTgyMnYtLjAwMjcyNWwtNy44Mzk1NDItNC4zOTU0NjktNy44Mzk1NDItNC4zOTgwNjR2LTY4LjIzMDU4N2w1Ljg1NzA3OC0zLjI4NDU5OSw3Ljg1NTUwMi00LjQwNjEwOSwxMS43ODU4NDgtNi42MTE4ODgsNy44MzY5MTQtNC4zOTUzMzksMTEuNzkxMjAxLTYuNjE0NDg0LDcuODU1NTAyLTQuNDAzNTE0LDcuODQyMTY5LTQuNDAwNzg5LDcuODQyMjAyLDQuNDAwNzg5LDcuODU1NDcsNC40MDM1MTQsMTkuNjI1NDU1LDExLjAwOTgyMiwxOS42NDQwMSwxMS4wMTc5OTcsNS44NTcwNzgsMy4yODQ1OTl2NjguMjMwNTg3WiIgZmlsbD0iI2ZmZiIvPjxwb2x5Z29uIHBvaW50cz0iMTU1LjY2Mzc0MiAxMDYuMjA4MTQ2IDE0Ny44MDI5MiAxMTAuNTk1Njk5IDEyOC4yMjgwMDYgOTkuNjE3NjY4IDEyMC4zODU4MDQgOTUuMjIyMTk5IDEwOC41OTQ1NzEgODguNjA3NzE2IDk2Ljc4NDc4MiA5NS4yMjc1MTkgODguOTc3MTI5IDk5LjYwNDMwMyA4MS4xMjE2NTkgOTUuMjE2ODc5IDg4Ljk1MDU2MSA5MC44MjQwMDYgMTAwLjc0NzA0OSA4NC4yMDk2NTIgMTA4LjU4NjU5MSA3OS44MTQxODMgMTIwLjM3NzgyNCA3My4yMDI0MjUgMTI4LjIzMDYzNCA2OC43OTYzMTYgMTM2LjA4MzQ3NiA3My4xOTk3IDEyOC4yMjUzNDYgNzcuNjAzMDg0IDExNi40MzQxMTMgODQuMjE0OTcyIDEyOC4yMjUzNDYgOTAuODI0MDA2IDEzNi4wNjc1NDggOTUuMjIyMTk5IDE1NS42NjM3NDIgMTA2LjIwODE0NiIgZmlsbD0iI2ZmZiIvPjxwb2x5Z29uIHBvaW50cz0iMTAyLjcxODkwNSAxMzAuMzg4NTQ0IDEwMi43MTg5MDUgMTQ0LjU2MDg2MSAxMTQuNTE4MDg2IDE1MS4xNjE5OCAxMjIuMzU3NjI4IDE1NS41NDY4MDggMTIyLjM1NzYyOCAxODMuNzU1ODQ1IDExNC41MTgwODYgMTc5LjM1NTA1NiAxMTQuNTE4MDg2IDE2MC41NDgxMjMgMTAyLjcxODkwNSAxNTMuOTMxMDQ0IDEwMi43MTg5MDUgMTcyLjczMjY1NyA5NC44ODIwMjMgMTY4LjMzMTg2OCA5NC44ODIwMjMgMTQ5LjUzNTU3NiA4My4wODU1MDIgMTQyLjkxODQ5NyA4My4wODU1MDIgMTYxLjcwOTQ2OSA3NS4yNDU5NjEgMTU3LjMwODY4MSA3NS4yNDU5NjEgMTI5LjE5MjY4MSA4My4wODU1MDIgMTMzLjU3NzUxIDk0Ljg4MjAyMyAxNDAuMTc2MDMzIDk0Ljg4MjAyMyAxMjUuOTkzMDc1IDgzLjA4NTUwMiAxMTkuMzc1OTk2IDc1LjI0NTk2MSAxMTQuOTgwNTI4IDc1LjI0NTk2MSAxMDUuNTcyOTc0IDgzLjA4NTUwMiAxMDkuOTY4NDQyIDk0Ljg4MjAyMyAxMTYuNTg1NjUxIDEwMi43MTg5MDUgMTIwLjk4MTEyIDExNC41MTgwODYgMTI3LjU5ODE5OCAxMjIuMzU3NjI4IDEzMS45OTM2NjcgMTIyLjM1NzYyOCAxNDEuNDAxMDkxIDExNC41MTgwODYgMTM3LjAwNTYyMiAxMDIuNzE4OTA1IDEzMC4zODg1NDQiIGZpbGw9IiNmZmYiLz48cG9seWdvbiBwb2ludHM9IjE4MS4yMTUzMDcgMTA1LjU3Mjk3NCAxODEuMjE1MzA3IDEzMy43OTI3ODEgMTczLjM1NzE3NyAxMzguMjAxNDg1IDE2MS41NzkyNzcgMTQ0LjgwNzkyMyAxNjEuNTc5Mjc3IDE1OC44NTgwMDcgMTczLjM1NzE3NyAxNTIuMjIyMjQzIDE4MS4yMTUzMDcgMTQ3Ljc5NDk4NCAxODEuMjE1MzA3IDE1Ny4zMTQwMDEgMTczLjM1NzE3NyAxNjEuNzI1NDMgMTYxLjU3OTI3NyAxNjguMzM0NTkzIDE1My43MzE3NTUgMTcyLjc0MDU3MiAxNDEuOTQzMTgyIDE3OS4zNTc3ODEgMTM0LjEwMzY0IDE4My43NTg1NyAxMzQuMTAzNjQgMTc0LjMzNzc4IDE0MS45NDMxODIgMTY5LjkyMTAzMSAxNTMuNzMxNzU1IDE2My4yODAwNzcgMTUzLjczMTc1NSAxNDkuMjA4NzEyIDE0MS45NDMxODIgMTU1LjgyMDQ3IDEzNC4xMDM2NCAxNjAuMjE1OTM5IDEzNC4xMDM2NCAxMzEuOTkzNjY3IDE0MS45NDMxODIgMTI3LjU5ODE5OCAxNDEuOTQzMTgyIDE0Ni40MTMwNDYgMTUzLjczMTc1NSAxMzkuODAxMjg4IDE1My43MzE3NTUgMTIwLjk4NjMxIDE2MS41NzkyNzcgMTE2LjU4NTY1MSAxNjEuNTc5Mjc3IDEzNS40MDA0OTkgMTczLjM1OTgwNSAxMjguNzk0MDYxIDE3My4zNTk4MDUgMTA5Ljk3OTA4MyAxODEuMjE1MzA3IDEwNS41NzI5NzQiIGZpbGw9IiNmZmYiLz48cG9seWdvbiBwb2ludHM9IjE3NS4zMzk2NDEgOTUuMjE2ODc5IDE2Ny40NjgyMTEgOTkuNjE0OTQzIDE0Ny44NTYwNTYgODguNjEzMDM2IDE0MC4wMTExOTQgODQuMjEyMjQ3IDE0Ny44NjQwMzYgNzkuODA4ODYzIDE1NS43MTE1NTggODQuMjA5NjUyIDE3NS4zMzk2NDEgOTUuMjE2ODc5IiBmaWxsPSIjZmZmIi8+PHBvbHlnb24gcG9pbnRzPSIxMzUuOTMyMDE0IDExNy4yMjg3MzggMTI4LjIzMDYzNCAxMjEuNTI4NDQ1IDEwOC42NTMwMjggMTEwLjU5Mjk3NCAxMDAuNzk3NTU4IDEwNi4yMDU1NTEgMTA4LjU2ODAwMyAxMDEuODQ5OTE4IDExNi4zOTk1OTcgMTA2LjI1MDcwNyAxMzUuOTMyMDE0IDExNy4yMjg3MzgiIGZpbGw9IiNmZmYiLz48L2c+PC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yves-blue: #002FA7;
+    --limestone: #F9F4E9;
+    --soft-neutral: #F5F6F7;
+    --obsidian: #060B14;
+    --dark-neutral: #B8C0CC;
+    --ink-muted: #5B6573;
+    --rule: #E6E9ED;
+    --font: "Public Sans", "Helvetica Neue", Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body { margin: 0; background: #fff; color: var(--obsidian); font-family: var(--font); font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .wrap { width: min(100% - 48px, 680px); margin: 0 auto; }
+
+  .masthead { background: var(--yves-blue); color: #fff; padding: calc(40px + env(safe-area-inset-top, 0px)) 0 72px; }
+  .masthead .logo { display: block; width: 104px; height: auto; margin: 0 0 96px; fill: #fff; }
+  .masthead h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.05; letter-spacing: -0.02em; margin: 0 0 24px; }
+  .masthead .lede { font-weight: 300; font-size: clamp(18px, 2.2vw, 21px); line-height: 1.5; margin: 0 0 40px; color: rgba(255,255,255,.9); max-width: 44ch; }
+  .masthead .meta { font-size: 14px; font-weight: 400; color: rgba(255,255,255,.7); }
+
+  main { padding: 72px 0 96px; }
+  section + section { margin-top: 64px; }
+  h2 { font-weight: 600; font-size: 24px; letter-spacing: -0.01em; color: var(--yves-blue); margin: 0 0 16px; }
+  p { margin: 0 0 18px; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; }
+  ol { padding-left: 22px; margin: 0; }
+  li { margin-bottom: 10px; padding-left: 4px; }
+  li:last-child { margin-bottom: 0; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .9em; color: var(--yves-blue); }
+
+  .tablewrap { overflow-x: auto; margin: 24px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.45; min-width: 520px; }
+  th, td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--rule); }
+  th:last-child, td:last-child { padding-right: 0; }
+  thead th { font-weight: 600; color: var(--ink-muted); border-bottom: 1px solid var(--obsidian); padding-top: 0; }
+  tbody th { font-weight: 600; white-space: nowrap; }
+
+  footer { border-top: 1px solid var(--rule); padding: 32px 0 calc(32px + env(safe-area-inset-bottom, 0px)); font-size: 14px; color: var(--ink-muted); }
+  footer a { color: var(--yves-blue); text-decoration: none; }
+  footer a:hover, footer a:focus-visible { text-decoration: underline; }
+
+  @media print { .masthead { padding: 24px 0 40px; } section { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <svg class="logo" role="img" aria-label="Bite" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 402.491224 211.445765"><g><g><path d="M196.201599,117.642259c0,11.107568,7.057006,17.585082,16.197832,17.585082,9.950057,0,15.390076-7.405291,15.390076-18.972332,0-11.571458-5.440019-18.976749-15.390076-18.976749-9.140826,0-16.197832,6.477513-16.197832,17.469478v2.894521ZM194.118516,141.47733h-7.288951v-72.896141h9.60177v32.979578c2.199424-6.249986,8.679146-12.035347,18.166784-12.035347,14.926189,0,23.141444,11.803403,23.141444,26.72959s-8.215255,26.609567-23.257047,26.609567c-9.372034,0-15.968097-5.554152-18.280916-11.915325l-2.083083,10.528079Z" fill="#fff"/><path d="M257.28394,141.477215h-9.602518v-50.563933h9.602518v50.563933ZM247.450194,68.581072h9.950056v10.879313h-9.950056v-10.879313Z" fill="#fff"/><path d="M272.092431,97.857925h-7.637236v-5.20955l3.240597-.57581c4.744188-.92778,5.786097-3.242809,6.941403-8.101127l1.505799-7.057006h5.437812v13.99841h14.230355v6.945083h-14.230355v30.660131c0,4.514452,1.851139,6.593854,6.247778,6.593854,3.238388,0,6.595325-1.387986,9.487639-3.00718v6.481195c-3.702278,2.775235-7.404555,4.278826-12.958709,4.278826-7.173347,0-12.265083-3.35473-12.265083-13.19139v-31.815436Z" fill="#fff"/><path d="M342.091368,112.320361c-.347549-8.101125-4.859792-15.505681-14.462299-15.505681-9.140826,0-14.578637,7.173347-15.736153,15.505681h30.198451ZM351.695347,124.467631c-2.546973,11.455854-10.991229,18.397257-23.604597,18.397257-15.040318,0-26.033756-10.180527-26.033756-25.918152,0-15.965888,10.993438-27.421741,25.572075-27.421741,16.081493,0,24.298222,11.455853,24.298222,25.222317v3.818618h-40.266318c.462415,9.835924,7.521632,16.777326,16.546117,16.777326,8.446466,0,13.422598-4.046145,15.503472-11.798985l7.984785.923361Z" fill="#fff"/></g><g><path d="M99.73529,50.563933l-49.171357,27.578546v55.15895l49.171357,27.580404,49.17138-27.580404v-55.15895l-49.17138-27.578546ZM143.282507,130.146866l-5.612735,3.148803-5.626044,3.154562-8.432411,4.729893-5.618449,3.152704-8.440053,4.733702-5.612735,3.146945-4.20479,2.359233-4.20479-2.359233-5.612735-3.146945-8.447647-4.739462-14.056574-7.882504v-.001951l-5.612735-3.146945-5.612735-3.148803v-48.849825l4.193387-2.351615,5.624162-3.154562,8.438102-4.733795,5.610854-3.146852,8.441934-4.735653,5.624162-3.152704,5.614617-3.150754,5.61464,3.150754,5.624139,3.152704,14.050884,7.882504,14.064168,7.888357,4.193387,2.351615v48.849825Z" fill="#fff"/><polygon points="119.376078 89.95583 113.748107 93.097108 99.733408 85.237364 94.118768 82.09042 85.676811 77.354767 77.221569 82.094229 71.631664 85.227795 66.007525 82.086611 71.612643 78.941524 80.058362 74.205964 85.671098 71.05902 94.113055 66.325318 99.73529 63.170756 105.357547 66.323367 99.731504 69.475979 91.289547 74.209773 99.731504 78.941524 105.346144 82.09042 119.376078 89.95583" fill="#fff"/><polygon points="81.470116 107.267834 81.470116 117.414533 89.917764 122.140617 95.530499 125.279944 95.530499 145.47626 89.917764 142.325506 89.917764 128.860645 81.470116 124.123134 81.470116 137.584187 75.859285 134.433433 75.859285 120.97619 67.413543 116.238679 67.413543 129.692113 61.800807 126.54136 61.800807 106.411654 67.413543 109.550981 75.859285 114.275206 75.859285 104.12089 67.413543 99.383379 61.800807 96.236434 61.800807 89.501077 67.413543 92.648022 75.859285 97.385625 81.470116 100.53257 89.917764 105.270081 95.530499 108.417025 95.530499 115.152289 89.917764 112.005345 81.470116 107.267834" fill="#fff"/><polygon points="137.669772 89.501077 137.669772 109.705104 132.043728 112.861525 123.611317 117.591418 123.611317 127.650603 132.043728 122.899715 137.669772 119.730009 137.669772 126.545169 132.043728 129.70354 123.611317 134.435384 117.992868 137.589853 109.552816 142.327457 103.94008 145.478211 103.94008 138.733378 109.552816 135.571197 117.992868 130.816593 117.992868 120.742171 109.552816 125.475873 103.94008 128.622817 103.94008 108.417025 109.552816 105.270081 109.552816 118.740609 117.992868 114.006907 117.992868 100.536286 123.611317 97.385625 123.611317 110.856154 132.04561 106.126261 132.04561 92.65564 137.669772 89.501077" fill="#fff"/><polygon points="133.463077 82.086611 127.827511 85.235413 113.78615 77.358576 108.169605 74.207822 113.791863 71.055211 119.410312 74.205964 133.463077 82.086611" fill="#fff"/><polygon points="105.249108 97.846045 99.73529 100.924428 85.718663 93.095157 80.094524 89.953972 85.65779 86.835548 91.264835 89.986302 105.249108 97.846045" fill="#fff"/></g></g><rect y="0" width="402.491224" height="211.445765" fill="none"/></svg>
+    <h1>Building Context Protocol</h1>
+    <p class="lede">An open protocol for how AI agents and software tools discover, request and act on building data across the asset lifecycle, under explicit permission and with full provenance.</p>
+    <p class="meta">Specification v0.1 draft, 10 October 2026. Maintained by Bite Engineering Ltd.</p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section id="purpose">
+      <h2>1. Purpose</h2>
+      <p>BCP is the interface layer between a building's context (design, programme, cost, risk, carbon, CDE record) and any tool that consumes or produces it.</p>
+      <p>BCP is <strong>not</strong> another data schema. IFC, COBie, ISO 19650 and EN 15804 remain the content standards; BCP standardises how that content is exposed, scoped and audited, whatever format it is stored in. The analogy is MCP: MCP standardised the interface to tools, not the tools themselves.</p>
+    </section>
+
+    <section id="principles">
+      <h2>2. Design principles</h2>
+      <ol>
+        <li><strong>Interface, not schema.</strong> BCP wraps existing content standards; it never redefines what a wall or a cost line is.</li>
+        <li><strong>Permission is first-class.</strong> No context moves without a scoped, auditable grant. This is what construction's NDA, liability and Building Safety Act reality demands, and what MCP lacks.</li>
+        <li><strong>Provenance on everything.</strong> Every resource carries who produced it, when, from which source revision, and at which lifecycle stage.</li>
+        <li><strong>Built on MCP.</strong> A BCP server is an MCP server plus a mandated envelope and conformance tests. No new transport; any MCP client can call it.</li>
+        <li><strong>Open spec, competitive implementations.</strong> The protocol is governed openly; servers and capabilities compete on quality.</li>
+      </ol>
+    </section>
+
+    <section id="primitives">
+      <h2>3. Core primitives</h2>
+      <p>Four primitives, mirroring MCP's tools, resources and prompts, with two additions construction cannot do without.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Primitive</th><th>What it is</th><th>Examples</th><th>MCP analogue</th></tr></thead>
+          <tbody>
+            <tr><th>Context resource</th><td>A typed, versioned, read-only slice of building state</td><td>IFC model revision, cost plan, risk register, CDE submission log, programme, LCI table</td><td>Resource</td></tr>
+            <tr><th>Capability</th><td>A function an agent can invoke against context</td><td>Detect design change, price tender risk, assemble Gateway 2 narrative, run LCIA</td><td>Tool</td></tr>
+            <tr><th>Permission</th><td>A scoped grant to read a resource or invoke a capability, with audit</td><td>Contractor A may read SE B's model rev 12 for project X until practical completion</td><td>None (new)</td></tr>
+            <tr><th>Event</th><td>A notification that context changed</td><td>New CDE revision, change detected, permission revoked</td><td>None (new)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Resource types are namespaced (<code>bcp.design.ifc</code>, <code>bcp.cost.plan</code>, <code>bcp.risk.register</code>, <code>bcp.carbon.lci</code>) and each declares its underlying content standard and version.</p>
+    </section>
+
+    <section id="envelope">
+      <h2>4. The BCP envelope</h2>
+      <p>Every resource and every capability response is wrapped in a mandatory envelope. A payload without one is not BCP-conformant.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Field</th><th>Content</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><th><code>provenance</code></th><td>Producing party, timestamp, source system, source revision ID, content hash</td><td>Golden thread; traceability of every number to its origin</td></tr>
+            <tr><th><code>stage</code></th><td>Lifecycle stage: RIBA 0–7 and, for carbon, EN 15804 module (A1–D)</td><td>The same wall has different meaning at Stage 3 and Stage 5</td></tr>
+            <tr><th><code>scope</code></th><td>Project ID, asset ID, discipline, permission grant ID</td><td>Enforces who may see what, per project</td></tr>
+            <tr><th><code>standard</code></th><td>Underlying content standard and version (IFC 4.3, COBie 3, ISO 19650-2)</td><td>Consumers know how to parse without guessing</td></tr>
+            <tr><th><code>audit</code></th><td>Append-only log entries for each access and each invocation</td><td>Satisfies BSA record-keeping and NDA obligations</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The envelope is JSON; the payload inside it may be any format the declared standard specifies.</p>
+    </section>
+
+    <section id="transport">
+      <h2>5. Transport and conformance</h2>
+      <p>Transport is MCP as-is: JSON-RPC over stdio or streamable HTTP. A BCP server registers its resources and capabilities through standard MCP discovery; the envelope travels in the resource contents and tool results. Events use MCP's notification mechanism.</p>
+      <p>Three conformance levels let adoption start small.</p>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Level</th><th>Requirement</th><th>Who</th></tr></thead>
+          <tbody>
+            <tr><th>L1 Expose</th><td>Serves at least one context resource with a valid envelope</td><td>A CDE, a cost tool, a carbon database</td></tr>
+            <tr><th>L2 Permit</th><td>Enforces scoped permissions and writes the audit log</td><td>A contractor's project environment</td></tr>
+            <tr><th>L3 Act</th><td>Exposes capabilities and emits events</td><td>Risk pricing, change detection, LCIA engines</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A public conformance test suite validates each level. The reference implementation is an open-source L1 server for a CDE export, plus the envelope JSON schema.</p>
+    </section>
+
+    <section id="governance">
+      <h2>6. Governance and roadmap</h2>
+      <p>The spec is published under an open licence (Apache 2.0 for code, CC-BY for the specification) and governed by a steering group of founding partners: Tier 1 contractors who co-sign the spec and expose data through it. Bite Engineering maintains the reference implementation and the first L3 capability, tender risk pricing. Stewardship of the specification transfers to an independent steering group or foundation once three independent implementations exist.</p>
+      <ol>
+        <li><strong>v0.1 (now):</strong> this document; envelope JSON schema; resource namespaces for design, cost, risk and carbon.</li>
+        <li><strong>v0.2:</strong> L1 reference server against one CDE export; conformance tests; first external implementation.</li>
+        <li><strong>v0.3:</strong> permission model and audit log finalised.</li>
+        <li><strong>v1.0:</strong> capabilities and events stable; three or more independent implementations; steering group chartered.</li>
+      </ol>
+      <p style="margin-top:24px">The spec grows only from calls real tools make. Nothing enters v1.0 that no implementation has used.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    © 2026 Bite Engineering Ltd. Specification CC-BY 4.0; reference code Apache 2.0. <a href="https://www.bite.engineering">bite.engineering</a>
+  </div>
+</footer>
+
+</body>
+</html>

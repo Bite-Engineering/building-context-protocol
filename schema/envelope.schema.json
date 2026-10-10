@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://buildingcontextprotocol.com/schema/envelope-0.1.json",
+  "title": "BCP Envelope",
+  "description": "Mandatory wrapper for every BCP context resource and capability response. Specification v0.1.",
+  "type": "object",
+  "required": ["bcp", "provenance", "stage", "scope", "standard", "payload"],
+  "additionalProperties": false,
+  "properties": {
+    "bcp": {
+      "type": "string",
+      "description": "Envelope version this object conforms to.",
+      "const": "0.1"
+    },
+    "resource": {
+      "type": "string",
+      "description": "Namespaced resource type, e.g. bcp.cost.plan.",
+      "pattern": "^bcp(\\.[a-z0-9]+)+$"
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["producer", "timestamp", "source_system", "source_revision", "content_hash"],
+      "additionalProperties": false,
+      "properties": {
+        "producer": { "type": "string", "description": "Organisation or party that produced the content." },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "source_system": { "type": "string", "description": "System of record, e.g. a CDE or cost tool." },
+        "source_revision": { "type": "string", "description": "Revision or version identifier in the source system." },
+        "content_hash": { "type": "string", "description": "SHA-256 of the payload, hex encoded.", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "required": ["riba"],
+      "additionalProperties": false,
+      "properties": {
+        "riba": { "type": "integer", "minimum": 0, "maximum": 7, "description": "RIBA Plan of Work stage." },
+        "en15804_module": {
+          "type": "string",
+          "description": "EN 15804 life cycle module, where the payload is carbon data.",
+          "enum": ["A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "C1", "C2", "C3", "C4", "D"]
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": ["project_id"],
+      "additionalProperties": false,
+      "properties": {
+        "project_id": { "type": "string" },
+        "asset_id": { "type": "string" },
+        "discipline": { "type": "string", "description": "e.g. structural, MEP, cost, programme." },
+        "grant_id": { "type": "string", "description": "Permission grant under which this content is released. Required at Level 2." }
+      }
+    },
+    "standard": {
+      "type": "object",
+      "required": ["name", "version"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "description": "Underlying content standard, e.g. IFC, COBie, ISO 19650-2, EN 15804." },
+        "version": { "type": "string" },
+        "media_type": { "type": "string", "description": "Media type of the payload, e.g. application/x-step for IFC-SPF." }
+      }
+    },
+    "audit": {
+      "type": "array",
+      "description": "Append-only access and invocation log. Required at Level 2.",
+      "items": {
+        "type": "object",
+        "required": ["actor", "action", "timestamp"],
+        "additionalProperties": false,
+        "properties": {
+          "actor": { "type": "string" },
+          "action": { "type": "string", "enum": ["read", "invoke", "grant", "revoke"] },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "grant_id": { "type": "string" }
+        }
+      }
+    },
+    "payload": {
+      "description": "The content itself, in the format the declared standard specifies. May be an object, a string (for serialised or base64 content) or a URI reference.",
+      "type": ["object", "string", "array"]
+    }
+  }
+}
